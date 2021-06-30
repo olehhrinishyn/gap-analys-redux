@@ -16,6 +16,7 @@ export function customReducer(state: any = initialState, action: {
     type: ExampleActionTypes,
     payload: any,
 }) {
+    console.info('reducer', state, action);
 
     switch (action.type) {
         case ExampleActionTypes.action1:

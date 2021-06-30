@@ -10,8 +10,13 @@ export function action1() {
 }
 
 export function action2(payload) {
-    return {
+
+    const a =  {
         type: ExampleActionTypes.action2,
         payload
     };
+
+    console.info('in action', a)
+
+    return a;
 }

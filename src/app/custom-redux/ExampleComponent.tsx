@@ -3,10 +3,13 @@ import {CustomConnect} from './CustomConnect';
 import {action1, action2} from './example-actions';
 
 class ExampleComponent extends React.Component<any, any> {
+
+
     render() {
+        console.info('props', this.props)
         return (<>
             <button onClick={this.props.sendAction1}>Action 1</button>
-            <button onClick={() => this.props.action2('I am Payload')}>Action 2</button>
+            <button onClick={() => this.props.action2(('I am Payload'))}>Action 2</button>
             <div>{JSON.stringify(this.props.action1State)}</div>
             <div>{JSON.stringify(this.props.action2State)}</div>
         </>);
