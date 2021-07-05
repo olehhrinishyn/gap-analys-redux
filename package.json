@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-once": "SET CI=true && react-scripts test",
+    "test-once": "react-scripts test",
     "eject": "react-scripts eject",
     "tslint": "tslint --project tsconfig.json"
   },
@@ -52,8 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run tslint",
-      "pre-push": "npm run test-once"
+      "pre-commit": "npm run tslint"
     }
   }
 }

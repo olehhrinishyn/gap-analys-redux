@@ -41,3 +41,33 @@ export function customReducer(state: any = initialState, action: {
     }
 
 }
+
+export type AuthState = {
+    isLoggedIn: boolean
+}
+
+export type reducerFunction<T> = (state: T, action: {type: string, payload: any}) => T
+
+export const authReducer: reducerFunction<AuthState> = (state: AuthState = {isLoggedIn: false}, action: {type: string, payload: boolean} ): AuthState => {
+    switch (action.type) {
+        case 'SET_LOG_IN':
+            return {
+                ...state,
+                isLoggedIn: action.payload
+            }
+        default:
+            return state;
+    }
+} 
+
+
+
+export const combineReducer = (reducersObject: Record<string, reducerFunction<any>>) => {
+    return (state, action) => {
+        const newState = {...state}
+        const keys = Object.keys(reducersObject);
+
+        keys.forEach(key => newState[key] = reducersObject[key](state, action))
+        return newState;
+    }
+}

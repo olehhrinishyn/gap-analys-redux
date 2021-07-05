@@ -20,3 +20,10 @@ export function action2(payload) {
 
     return a;
 }
+
+export const setLogin = (payload: boolean) => {
+    return {
+        type: 'SET_LOG_IN',
+        payload
+    }
+}

@@ -14,6 +14,19 @@ export const CustomConnect = (mapStateToProps, mapDispatchToProps) => {
       //   }
       // }) // TODO: UNSUBSCIBE FROM EVENT
       // TODO: HOW TO COMBINE REDUCER
+      let  statepropscurrent = mapStateToProps(store.state)
+      const [stateProps, setStateProps] = useState(statepropscurrent)
+      useEffect(() => {
+        const listener = () => {
+          console.info('new Event')
+          statepropscurrent = mapStateToProps(store.state);
+          setStateProps(statepropscurrent);
+        }
+        store.event.on('new state', listener);
+        return () => {
+          store.event.off('new state', listener)
+        }
+      },[])
       const dispatchedAction = {};
       const keys = Object.keys(mapDispatchToProps);
       
@@ -26,14 +39,9 @@ export const CustomConnect = (mapStateToProps, mapDispatchToProps) => {
         dispatchedAction[key] = payloadfunc;
        }
        ); // TODO: CHECK DISPATCH
-       let  statepropscurrent = mapStateToProps(store)
-      const [stateProps, setStateProps] = useState(statepropscurrent)
-      
-      store.event.on('new state', () => {
-        statepropscurrent = mapStateToProps(store.state);
-        setStateProps(statepropscurrent);
-      })
 
+
+      //store.event.removeListener('new state', listener)
 
        
       return <Component {...stateProps} {...dispatchedAction} {...ownProps}/>
